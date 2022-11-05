@@ -100,7 +100,7 @@ public class QuestionActivity extends AppCompatActivity {
             timeLeftInMillis = 30000;
         }
         else {
-//            finishQuestion();
+            finishQuestion();
         }
     }
     //back
