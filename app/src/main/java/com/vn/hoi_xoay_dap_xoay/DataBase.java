@@ -52,16 +52,14 @@ public class DataBase extends SQLiteOpenHelper {
                 "FOREIGN KEY(" + Table.QuestionsTable.COLUMN_CATEGORY_ID + ") REFERENCES " +
                 Table.CategoriesTable.TABLE_NAME + "(" + Table.CategoriesTable._ID + ")" + "ON DELETE CASCADE" +
                 ")";
-        //tạo bảng
+
         db.execSQL(CATEGORIES_TABLE);
         db.execSQL(QUESTIONS_TABLE);
 
-        //insert dữ liệu
+
         CreateCategories();
         CreateQuestions();
     }
-
-
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
@@ -70,6 +68,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Table.QuestionsTable.TABLE_NAME);
         onCreate(db);
     }
+
     //insert chủ đề vào cơ sở dữ liệu
     private void insertCategories(Category category){
         ContentValues values = new ContentValues();
@@ -77,9 +76,8 @@ public class DataBase extends SQLiteOpenHelper {
         db.insert(Table.CategoriesTable.TABLE_NAME, null, values);
     }
 
-    //Các giá trị insert
     private void CreateCategories(){
-        // Đố vui id = 1
+        //Dố vui id = 1
         Category c1 = new Category("Đố vui");
         insertCategories(c1);
         // Hại não id = 2
@@ -89,7 +87,7 @@ public class DataBase extends SQLiteOpenHelper {
         Category c3 = new Category("Random");
         insertCategories(c3);
     }
-    // insert câu hỏi và đáp án vào csdl
+
     private  void insertQuestion(Question question){
         ContentValues values = new ContentValues();
         values.put(Table.QuestionsTable.COLUMN_QUESTION, question.getQuestion());
@@ -101,17 +99,15 @@ public class DataBase extends SQLiteOpenHelper {
         values.put(Table.QuestionsTable.COLUMN_CATEGORY_ID, question.getCategoryID());
 
         db.insert(Table.QuestionsTable.TABLE_NAME, null, values);
-
     }
-
     //tạo dữ liệu bảng câu hỏi
-    private  void CreateQuestions(){
+    private  void CreateQuestions() {
         //Dữ liệu bảng question
         Question q1 = new Question("Cuộc khai thác thuộc địa lần thứ hai (1919-1929) của thực dân Pháp ở Đông Dương được diễn ra trong hoàn cảnh nào?",
                 "A. Nước Pháp đang chuyển sang giai đoạn chủ nghĩa đế quốc",
                 "B. Nước Pháp bị thiệt hại nặng nề do cuộc chiến tranh xâm lược Việt Nam",
                 "C. Nước Pháp bị thiệt hại nặng nề do cuộc chiến tranh thế giới thứ nhất (1914-1918)",
-                "D. Tình hình kinh tế, chính trị ở Pháp ổn định",3,2);
+                "D. Tình hình kinh tế, chính trị ở Pháp ổn định", 3, 2);
         insertQuestion(q1);
         Question q2 = new Question("Thực dân Pháp tiến hành cuộc khai thác thuộc địa lần thứ hai ở Đông Dương (1919 - 1929) khi",
                 "A. Hệ thống thuộc địa của chủ nghĩa đế quốc tan rã.",
@@ -156,12 +152,10 @@ public class DataBase extends SQLiteOpenHelper {
                 "a. 3134 mét.", "b. 3143 mét.", "c. 3314 mét.","a. 1 mét 2", 2, 3);
         insertQuestion(q13);
 
-        // có 13 bản ghi cho bảng question
     }
 
-    //Hàm trả về dữ liệu các chủ đề
-    @SuppressLint("Range")
-    public List<Category> getDataCategories(){
+
+    public List<Category> getDataCategories() {
         List<Category> categoryList = new ArrayList<>();
         db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM "+ Table.CategoriesTable.TABLE_NAME, null);
@@ -179,9 +173,11 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     // Lấy dữ liệu câu hỏi và đáp án có id = id category theo chủ đề đã chọn
-    @SuppressLint("Range")
-    public  ArrayList<Question> getQuestion(int categoryID){
+
+
+    public  ArrayList<Question> getQuestions(int categoryID){
         ArrayList<Question> questionArrayList = new ArrayList<>();
+
         db = getReadableDatabase();
 
         String selection = Table.QuestionsTable.COLUMN_CATEGORY_ID + " = ?";
@@ -193,14 +189,15 @@ public class DataBase extends SQLiteOpenHelper {
         if (c.moveToFirst()){
             do {
                 Question question = new Question();
-                question .setId(c.getInt(c.getColumnIndex(Table.QuestionsTable._ID)));
-                question .setQuestion(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_QUESTION)));
-                question .setOption1(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION1)));
-                question .setOption2(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION2)));
-                question .setOption3(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION3)));
-                question .setOption4(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION4)));
-                question .setAnswer(c.getInt(c.getColumnIndex(Table.QuestionsTable.COLUMN_ANSWER)));
-                question .setCategoryID(c.getInt(c.getColumnIndex(Table.QuestionsTable.COLUMN_CATEGORY_ID)));
+
+                question.setId(c.getInt(c.getColumnIndex(Table.QuestionsTable._ID)));
+                question.setQuestion(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_QUESTION)));
+                question.setOption1(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION1)));
+                question.setOption2(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION2)));
+                question.setOption3(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION3)));
+                question.setOption4(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION4)));
+                question.setAnswer(c.getInt(c.getColumnIndex(Table.QuestionsTable.COLUMN_ANSWER)));
+                question.setCategoryID(c.getInt(c.getColumnIndex(Table.QuestionsTable.COLUMN_CATEGORY_ID)));
 
                 questionArrayList.add(question);
             }
@@ -209,4 +206,5 @@ public class DataBase extends SQLiteOpenHelper {
         c.close();
         return questionArrayList;
     }
+
 }

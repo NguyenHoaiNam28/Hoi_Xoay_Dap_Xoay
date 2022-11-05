@@ -4,6 +4,7 @@ import android.provider.BaseColumns;
 
 public final class Table {
     private Table(){}
+
     public static  class CategoriesTable implements BaseColumns{
         // dữ liệu bảng categories
         public static  final String TABLE_NAME = "categories";
