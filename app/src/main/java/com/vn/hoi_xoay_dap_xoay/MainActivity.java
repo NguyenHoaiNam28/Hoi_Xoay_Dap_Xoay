@@ -63,11 +63,7 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE_QUESTION);
     }
 
-//    public void btn_batDau(View view) {
-//        String Title = "Mày Nghĩ M Vui Không \n   Vào Chiến Thôi";
-//        Toast.makeText(this,Title  , Toast.LENGTH_SHORT).show();
 
-//    }
 
     private  void addControls(){
         txtScore = findViewById(R.id.txtScore);

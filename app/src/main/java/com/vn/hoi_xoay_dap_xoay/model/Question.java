@@ -8,10 +8,9 @@ public class Question {
 
     private int categoryID;
 
-    public Question(String s, String s1, String s2, String s3, String s4, int i, int i1){}
+    public Question() {}
 
-    public Question() {
-        this.id = id;
+    public Question(String question, String option1, String option2, String option3, String option4, int answer, int categoryID) {
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
@@ -84,6 +83,4 @@ public class Question {
     public void setCategoryID(int categoryID) {
         this.categoryID = categoryID;
     }
-
-
 }
