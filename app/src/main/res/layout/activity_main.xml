@@ -49,34 +49,49 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/action_bar_spinner"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="50dp"
+            android:scrollbarSize="24dp"></Spinner>
 
-            android:text="TextView" />
 
-        <EditText
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Điểm Cao :  100điểm "
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
 
-            android:id="@+id/editName"
-            android:layout_marginTop="30dp"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:layout_centerHorizontal="true"
-            android:hint="Nhập Tên vào đây"></EditText>
+
+            >
+
+        </TextView>
+
+        <!--        <EditText-->
+
+        <!--            android:id="@+id/editName"-->
+        <!--            android:layout_width="300dp"-->
+        <!--            android:layout_height="48dp"-->
+        <!--            android:layout_centerHorizontal="true"-->
+        <!--            android:layout_marginTop="30dp"-->
+        <!--            android:hint="Nhập Tên vào đây"></EditText>-->
 
 
         <!--        <EditText-->
-<!--            android:id="@+id/editAge"-->
-<!--            android:layout_width="300dp"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_marginStart="23dp"-->
-<!--            android:layout_marginBottom="28dp"-->
-<!--            android:hint="Nhập Tuổi vào đây"-->
-<!--            android:inputType="number"></EditText>-->
+        <!--            android:id="@+id/editAge"-->
+        <!--            android:layout_width="300dp"-->
+        <!--            android:layout_height="48dp"-->
+        <!--            android:layout_alignParentBottom="true"-->
+        <!--            android:layout_centerHorizontal="true"-->
+        <!--            android:layout_marginStart="23dp"-->
+        <!--            android:layout_marginBottom="28dp"-->
+        <!--            android:hint="Nhập Tuổi vào đây"-->
+        <!--            android:inputType="number"></EditText>-->
     </RelativeLayout>
 
     <RelativeLayout
@@ -89,33 +104,29 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
         app:layout_constraintVertical_bias="0.273">
 
-        <Button
-            android:layout_width="180dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/input"
-            android:onClick="btn_batDau"
-            android:text="Bắt Đầu">
-
-        </Button>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/input"
+        android:onClick="btn_batDau"
+        android:text="Bắt Đầu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
-        app:layout_constraintVertical_bias="0.273">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
-        <Button
-            android:layout_width="180dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/input"
-            android:onClick="btn_batDau"
-            android:text="Lich Sử ">
+    </Button>
 
-        </Button>
-    </RelativeLayout>
+    <!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"-->
+<!--        app:layout_constraintVertical_bias="0.273">-->
+
+<!--      -->
+<!--    </RelativeLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
