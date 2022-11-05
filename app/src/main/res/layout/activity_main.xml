@@ -62,7 +62,7 @@
             android:id="@+id/txtScore"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Điểm Cao :  100điểm "
+            android:text="Điểm Cao :  100"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20dp"
