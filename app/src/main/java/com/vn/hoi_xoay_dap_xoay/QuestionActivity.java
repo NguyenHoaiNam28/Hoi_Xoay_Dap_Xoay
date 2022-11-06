@@ -6,16 +6,19 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vn.hoi_xoay_dap_xoay.model.Question;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Locale;
 
 public class QuestionActivity extends AppCompatActivity {
 
@@ -68,6 +71,29 @@ public class QuestionActivity extends AppCompatActivity {
 
         showNextQuestion();
 
+
+        //button xác nhận, câu tiếp, hoàn thành
+        btnXacNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Nếu chưa trả lời câu hỏi
+                if (!answered){
+                    //Nếu chọn 1 trong 4 đáp án
+                    if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()){
+                        //Kiểm tra đáp án
+                        checkAnswer();
+                    }else {
+                        //Thông báo nếu không chọn
+                        Toast.makeText(QuestionActivity.this, "Hãy chọn đáp án", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    showNextQuestion();
+                }
+
+            }
+        });
+
     }
     // hiển thị câu hỏi
     private void showNextQuestion() {
@@ -98,11 +124,111 @@ public class QuestionActivity extends AppCompatActivity {
             btnXacNhan.setText("Xác nhận");
             // thời gian chạy 30s
             timeLeftInMillis = 30000;
+            //Đếm ngược thời gian trả lời
+            startCountDown();
         }
         else {
             finishQuestion();
         }
     }
+
+    // Đếm ngược thời gian
+    private void startCountDown() {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long l) {
+                timeLeftInMillis = l;
+                updateCountDownText();
+            }
+
+            @Override
+            public void onFinish() {
+                timeLeftInMillis = 0;
+                updateCountDownText();
+
+                // Phương thức kiểm tra đáp án
+                checkAnswer();
+            }
+        }.start();
+    }
+
+    //Kiểm tra đáp án
+    private void checkAnswer() {
+        // true đã trả lời
+        answered = true;
+        //Trả về radiobutton trong rdGroup
+        RadioButton rbSelected = findViewById(radioGroup.getCheckedRadioButtonId());
+        //Vị trí của câu đã chọn
+        int answer = radioGroup.indexOfChild(rbSelected) + 1;
+        //Nếu trả lời đúng đáp án
+        if (answer == currentQuestion.getAnswer()){
+            //Tăng 10 diểm
+            Score = Score + 10;
+            //Hiển thị điểm
+            txtviewscore.setText("Điểm : "+ Score);
+        }
+        //Phương thức hiển thị đáp án
+        showSolution();
+
+
+    }
+    //Đáp án
+    private void showSolution() {
+        rb1.setTextColor(Color.RED);
+        rb2.setTextColor(Color.RED);
+        rb3.setTextColor(Color.RED);
+        rb4.setTextColor(Color.RED);
+        //Kiểm tra đáp án
+        switch (currentQuestion.getAnswer()){
+            case 1:
+                rb1.setTextColor(Color.GREEN);
+                txtviewquestion.setText("Đáp án là A");
+                break;
+            case 2:
+                rb2.setTextColor(Color.GREEN);
+                txtviewquestion.setText("Đáp án là B");
+                break;
+            case 3:
+                rb3.setTextColor(Color.GREEN);
+                txtviewquestion.setText("Đáp án là C");
+                break;
+            case 4:
+                rb4.setTextColor(Color.GREEN);
+                txtviewquestion.setText("Đáp án là D");
+                break;
+
+        }
+
+        //Nếu còn câu hỏi thì button sẽ hiện là câu tiếp
+        if (questionCounter<questionSize){
+            btnXacNhan.setText("Câu tiếp");
+        }
+        //setText hoàn thành
+        else {
+            btnXacNhan.setText("Hoàn thành");
+        }
+        countDownTimer.cancel();
+    }
+
+    //update thời gian
+    private void updateCountDownText() {
+        //tính phút
+        int minutes = (int) ((timeLeftInMillis/1000)/60);
+        // tính giây
+        int seconds = (int) ((timeLeftInMillis/1000)%60);
+        //Định dạng thời gian
+        String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        //Hiển thị lên màn hình
+        txtviewcountdown.setText(timeFormatted);
+        //Nếu thời gian dưới 10s thì chuyển qua màu đỏ
+        if (timeLeftInMillis < 10000){
+            txtviewcountdown.setTextColor(Color.RED);
+        }
+        else {
+            txtviewcountdown.setTextColor(Color.BLACK);
+        }
+    }
+
     //back
     @Override
     public void onBackPressed() {
