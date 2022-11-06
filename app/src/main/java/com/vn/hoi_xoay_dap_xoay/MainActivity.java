@@ -1,8 +1,10 @@
 package com.vn.hoi_xoay_dap_xoay;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner spinnerCategories;
     private Button btnStart;
 
+    private int hightscore;
     private static final int REQUEST_CODE_QUESTION = 1;
 
     @Override
@@ -32,6 +35,18 @@ public class MainActivity extends AppCompatActivity {
         addEvents();
         //load chủ đề
         loadCategories();
+        //load điểm cao
+        loadHightScore();
+
+
+
+
+    }
+
+    private void loadHightScore() {
+        SharedPreferences preferences = getSharedPreferences("share", MODE_PRIVATE);
+        hightscore = preferences.getInt("hightscore", 0);
+        txtScore.setText("Điểm cao : "+ hightscore);
 
 
     }
@@ -69,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         txtScore = findViewById(R.id.txtScore);
         btnStart = findViewById(R.id.btnStart);
         spinnerCategories = findViewById(R.id.spinnerCategories);
+
+
     }
 
     private void loadCategories(){
@@ -80,5 +97,34 @@ public class MainActivity extends AppCompatActivity {
         categoryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerCategories.setAdapter(categoryArrayAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_QUESTION){
+            if (resultCode == RESULT_OK){
+                int score = data.getIntExtra("score", 0);
+
+                if (score > hightscore) {
+                    updateHightScore(score);
+                }
+            }
+        }
+    }
+
+    //cập nhập điểm cao
+    private void updateHightScore(int score) {
+        //Gán điểm cao mới
+        hightscore = score;
+        // Hiển thị
+        txtScore.setText("Điểm cao : " + hightscore);
+//        Lưu trữ điểm
+        SharedPreferences sharedPreferences = getSharedPreferences("share", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //gán giá trị điểm cao mới
+        editor.putInt("hightscore", hightscore);
+        //hoàn tất
+        editor.apply();
     }
 }

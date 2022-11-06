@@ -28,6 +28,7 @@ public class QuestionActivity extends AppCompatActivity {
     private TextView txtviewquestioncount;
     private TextView txtviewcategory;
     private TextView txtviewcountdown;
+    private TextView txtTitle;
     private RadioGroup radioGroup;
     private RadioButton rb1, rb2, rb3, rb4;
     private Button btnXacNhan;
@@ -98,10 +99,9 @@ public class QuestionActivity extends AppCompatActivity {
     }
     // hiển thị câu hỏi
     private void showNextQuestion() {
-        rb1.setTextColor(Color.BLACK);
-        rb2.setTextColor(Color.BLACK);
-        rb3.setTextColor(Color.BLACK);
-        rb4.setTextColor(Color.BLACK);
+        // add màu txt
+        addMau();
+
         // xóa chọn
         radioGroup.clearCheck();
         // Nếu còn câu hỏi
@@ -131,6 +131,20 @@ public class QuestionActivity extends AppCompatActivity {
         else {
             finishQuestion();
         }
+    }
+
+    private void addMau() {
+        rb1.setTextColor(Color.BLACK);
+        rb2.setTextColor(Color.BLACK);
+        rb3.setTextColor(Color.BLACK);
+        rb4.setTextColor(Color.BLACK);
+
+        txtviewscore.setTextColor(Color.BLACK);
+        txtviewquestion.setTextColor(Color.BLACK);
+        txtviewcountdown.setTextColor(Color.BLACK);
+        txtviewquestioncount.setTextColor(Color.BLACK);
+        txtTitle.setTextColor(Color.BLACK);
+        txtviewcategory.setTextColor(Color.BLACK);
     }
 
     // Đếm ngược thời gian
@@ -168,8 +182,14 @@ public class QuestionActivity extends AppCompatActivity {
             Score = Score + 10;
             //Hiển thị điểm
             txtviewscore.setText("Điểm : "+ Score);
-        }else {
+        }
+        if (answer != currentQuestion.getAnswer() && timeLeftInMillis > 1000){
             Toast.makeText(this, "Rất tiếc, bạn sai rồi", Toast.LENGTH_SHORT).show();
+
+        }
+        if (answer != currentQuestion.getAnswer() && timeLeftInMillis == 0){
+            Toast.makeText(this, "Rất tiếc, hết giờ mất rồi", Toast.LENGTH_SHORT).show();
+
         }
         //Phương thức hiển thị đáp án
         showSolution();
@@ -217,20 +237,28 @@ public class QuestionActivity extends AppCompatActivity {
     //update thời gian
     private void updateCountDownText() {
         //tính phút
-        int minutes = (int) ((timeLeftInMillis/1000)/60);
+//        int minutes = (int) ((timeLeftInMillis/1000)/60);
         // tính giây
         int seconds = (int) ((timeLeftInMillis/1000)%60);
         //Định dạng thời gian
-        String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        String timeFormatted = String.format(Locale.getDefault(), "%02d", seconds);
         //Hiển thị lên màn hình
         txtviewcountdown.setText(timeFormatted);
+
+        if (timeLeftInMillis < 10000 && timeLeftInMillis >9000){
+            Toast.makeText(this, "Thời gian sắp hết!!!", Toast.LENGTH_SHORT).show();
+
+        }
         //Nếu thời gian dưới 10s thì chuyển qua màu đỏ
         if (timeLeftInMillis < 10000){
             txtviewcountdown.setTextColor(Color.RED);
+
         }
         else {
             txtviewcountdown.setTextColor(Color.BLACK);
         }
+
+
     }
 
     //back
@@ -268,7 +296,7 @@ public class QuestionActivity extends AppCompatActivity {
         rb4 = findViewById(R.id.radioButton4);
 
         btnXacNhan = findViewById(R.id.btnXacNhan);
-
+        txtTitle = findViewById(R.id.txtTitle);
     }
 
 
