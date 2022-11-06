@@ -7,9 +7,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logopm"
         android:label="Hỏi Xoáy Đáp Xoay"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logopm"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hoi_Xoay_Dap_Xoay"
         tools:targetApi="31">
