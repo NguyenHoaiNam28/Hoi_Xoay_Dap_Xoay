@@ -91,6 +91,7 @@ public class QuestionActivity extends AppCompatActivity {
                     showNextQuestion();
                 }
 
+
             }
         });
 
@@ -162,10 +163,13 @@ public class QuestionActivity extends AppCompatActivity {
         int answer = radioGroup.indexOfChild(rbSelected) + 1;
         //Nếu trả lời đúng đáp án
         if (answer == currentQuestion.getAnswer()){
+            Toast.makeText(this, "Chúc mừng, bạn đã trả lời đúng", Toast.LENGTH_SHORT).show();
             //Tăng 10 diểm
             Score = Score + 10;
             //Hiển thị điểm
             txtviewscore.setText("Điểm : "+ Score);
+        }else {
+            Toast.makeText(this, "Rất tiếc, bạn sai rồi", Toast.LENGTH_SHORT).show();
         }
         //Phương thức hiển thị đáp án
         showSolution();
@@ -254,7 +258,7 @@ public class QuestionActivity extends AppCompatActivity {
         txtviewcountdown = findViewById(R.id.txt_countdown);
         txtviewcategory = findViewById(R.id.txt_view_category);
         txtviewquestion = findViewById(R.id.txtQuestion);
-        txtviewscore = findViewById(R.id.txtScore);
+        txtviewscore = findViewById(R.id.txt_view_score);
         txtviewquestioncount = findViewById(R.id.txt_view_question_count);
 
         radioGroup = findViewById(R.id.radioGroup);
