@@ -1,11 +1,14 @@
 package com.vn.hoi_xoay_dap_xoay;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -45,11 +48,13 @@ public class QuestionActivity extends AppCompatActivity {
     private int Score;
     private boolean answered;
     private Question currentQuestion;
+    private Vibrator vibrator;
 
     private int count = 0;
 
     private int checkPress = 0;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +85,8 @@ public class QuestionActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
     private void addEvents() {
@@ -102,10 +109,7 @@ public class QuestionActivity extends AppCompatActivity {
                     showNextQuestion();
                 }
 
-                rb1.setVisibility(View.VISIBLE);
-                rb2.setVisibility(View.VISIBLE);
-                rb3.setVisibility(View.VISIBLE);
-                rb4.setVisibility(View.VISIBLE);
+
 
 
             }
@@ -122,15 +126,17 @@ public class QuestionActivity extends AppCompatActivity {
                 _arr.add(4);
 
 //                Log.e("TAG", currentQuestion.getAnswer()+" Dap an");
+
+                //remove đi đáp ấn đúng trong list
                 _arr.remove(currentQuestion.getAnswer()-1);
 //                Log.e("TAG", _arr.toString()+"Da xoa");
                 Random rd = new Random();
 
-
-
+                //random ra 1 số và remove số đó đi trong list
                 int d = rd.nextInt(_arr.get(rd.nextInt(_arr.size())));
                 _arr.remove(d);
 
+                //ẩn 2 số còn lại trong list
                 for(int i=0;i<_arr.size();i++){
                     switch (_arr.get(i)) {
                         case 1:
@@ -147,11 +153,10 @@ public class QuestionActivity extends AppCompatActivity {
                             break;
                     }
                 }
+                // ẩn button trợ giúp 50/50 khi đã ấn
                 btntrogiup1.setVisibility(View.INVISIBLE);
 
             }
-
-
         });
     }
 
@@ -227,6 +232,8 @@ public class QuestionActivity extends AppCompatActivity {
         }.start();
     }
 
+
+
     //Kiểm tra đáp án
     private void checkAnswer() {
         // true đã trả lời
@@ -291,6 +298,10 @@ public class QuestionActivity extends AppCompatActivity {
         //Nếu còn câu hỏi thì button sẽ hiện là câu tiếp
         if (questionCounter<questionSize){
             btnXacNhan.setText("Câu tiếp");
+            rb1.setVisibility(View.VISIBLE);
+            rb2.setVisibility(View.VISIBLE);
+            rb3.setVisibility(View.VISIBLE);
+            rb4.setVisibility(View.VISIBLE);
         }
         //setText hoàn thành
         else {
@@ -313,11 +324,17 @@ public class QuestionActivity extends AppCompatActivity {
         if (timeLeftInMillis < 10000 && timeLeftInMillis >9000){
             Toast.makeText(this, "Thời gian sắp hết!!!", Toast.LENGTH_SHORT).show();
 
+
         }
         //Nếu thời gian dưới 10s thì chuyển qua màu đỏ
         if (timeLeftInMillis < 10000){
             txtviewcountdown.setTextColor(Color.RED);
 
+            //rung khi còn dưới 10s
+            vibrator   = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+            if (vibrator.hasVibrator()) {
+                vibrator.vibrate(500); // for 500 ms
+            }
         }
         else {
             txtviewcountdown.setTextColor(Color.BLACK);

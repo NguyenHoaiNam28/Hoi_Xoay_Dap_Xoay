@@ -83,9 +83,9 @@ public class DataBase extends SQLiteOpenHelper {
         // Hại não id = 2
         Category c2 = new Category("Hại não");
         insertCategories(c2);
-        // Random id = 3
-        Category c3 = new Category("Random");
-        insertCategories(c3);
+//        // Random id = 3
+//        Category c3 = new Category("Random");
+//        insertCategories(c3);
     }
 
     private  void insertQuestion(Question question){
@@ -103,11 +103,11 @@ public class DataBase extends SQLiteOpenHelper {
     //tạo dữ liệu bảng câu hỏi
     private  void CreateQuestions() {
         //Dữ liệu bảng question
-        Question q1 = new Question("Cuộc khai thác thuộc địa lần thứ hai (1919-1929) của thực dân Pháp ở Đông Dương được diễn ra trong hoàn cảnh nào?",
-                "A. Nước Pháp đang chuyển sang giai đoạn chủ nghĩa đế quốc",
-                "B. Nước Pháp bị thiệt hại nặng nề do cuộc chiến tranh xâm lược Việt Nam",
-                "C. Nước Pháp bị thiệt hại nặng nề do cuộc chiến tranh thế giới thứ nhất (1914-1918)",
-                "D. Tình hình kinh tế, chính trị ở Pháp ổn định", 3, 2);
+        Question q1 = new Question("Lịch nào dài nhất?",
+                "A. Lịch âm",
+                "B. Lịch thiên văn",
+                "C. Lịch sử",
+                "D. Lịch thiệp", 3, 2);
         insertQuestion(q1);
         Question q2 = new Question("Thực dân Pháp tiến hành cuộc khai thác thuộc địa lần thứ hai ở Đông Dương (1919 - 1929) khi",
                 "A. Hệ thống thuộc địa của chủ nghĩa đế quốc tan rã.",
@@ -143,13 +143,13 @@ public class DataBase extends SQLiteOpenHelper {
                 "A. Pô-đu-me", "B. Anbe-xarô", "C. Pôn-bô","D. Va-ren", 2, 2);
         insertQuestion(q10);
         Question q11 = new Question("Hà Nội là thủ đô nước nào?",
-                "A. Mỹ", "B. Cà Màu", "C.Nam Cực","D.Việt Nam", 4, 3);
+                "A. Mỹ", "B. Cà Màu", "C.Nam Cực","D.Việt Nam", 4, 1);
         insertQuestion(q11);
         Question q12 = new Question("Trong câu “Thưa ông, chúng cháu ở Gia Lâm lên đấy ạ. Đi bốn năm hôm mới lên đến đây, vất vả quá!”. Câu nói “Thưa ông” thuộc thành phần gì của câu?",
                 " A. Phụ chú", " B. Cảm thán", "C. Gọi đáp","D. Tình thái", 3, 1);
         insertQuestion(q12);
         Question q13 = new Question("Đỉnh núi Pan-xi-păng có độ cao bao nhiêu mét?",
-                "a. 3134 mét.", "b. 3143 mét.", "c. 3314 mét.","a. 1 mét 2", 2, 3);
+                "a. 3134 mét.", "b. 3143 mét.", "c. 3314 mét.","a. 1 mét 2", 2, 1);
         insertQuestion(q13);
 
     }
