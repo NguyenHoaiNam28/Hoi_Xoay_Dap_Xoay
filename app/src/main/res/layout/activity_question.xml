@@ -24,27 +24,32 @@
 <!--        android:layout_height="wrap_content"></TextView>-->
 
     <TextView
-        android:id="@+id/txt_view_score"
+        android:id="@+id/txt_view_question_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Điểm: 0"
-        android:textSize="20sp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="Câu hỏi : 1/a"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txt_view_question_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Câu hỏi : 1/a"
-        android:textSize="16sp"
+        android:id="@+id/txt_view_score"
+        android:layout_width="96dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="Điểm: 0"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_view_score" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_category" />
 
     <TextView
         android:id="@+id/txt_view_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:text="Chủ đề : a"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,15 +70,15 @@
 
     <TextView
         android:id="@+id/txtQuestion"
-        android:layout_width="354dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="152dp"
+        android:layout_width="369dp"
+        android:layout_height="112dp"
+        android:layout_marginTop="8dp"
         android:text="Câu hỏi ?"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -122,11 +127,22 @@
         android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="156dp"
         android:text="Câu hỏi"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btntrogiup1"
+        android:layout_width="78dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="20dp"
+        android:text="50/50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.012"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_countdown" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

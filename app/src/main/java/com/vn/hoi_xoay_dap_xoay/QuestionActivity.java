@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -18,7 +19,9 @@ import com.vn.hoi_xoay_dap_xoay.model.Question;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class QuestionActivity extends AppCompatActivity {
 
@@ -31,7 +34,7 @@ public class QuestionActivity extends AppCompatActivity {
     private TextView txtTitle;
     private RadioGroup radioGroup;
     private RadioButton rb1, rb2, rb3, rb4;
-    private Button btnXacNhan;
+    private Button btnXacNhan, btntrogiup1;
 
     private CountDownTimer countDownTimer;
     private ArrayList<Question> questionList;
@@ -45,6 +48,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     private int count = 0;
 
+    private int checkPress = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +76,13 @@ public class QuestionActivity extends AppCompatActivity {
 
         showNextQuestion();
 
+        addEvents();
 
+
+
+    }
+
+    private void addEvents() {
         //button xác nhận, câu tiếp, hoàn thành
         btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,11 +102,59 @@ public class QuestionActivity extends AppCompatActivity {
                     showNextQuestion();
                 }
 
+                rb1.setVisibility(View.VISIBLE);
+                rb2.setVisibility(View.VISIBLE);
+                rb3.setVisibility(View.VISIBLE);
+                rb4.setVisibility(View.VISIBLE);
+
 
             }
         });
 
+        btntrogiup1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                List<Integer> _arr = new ArrayList<Integer>();
+                _arr.add(1);
+                _arr.add(2);
+                _arr.add(3);
+                _arr.add(4);
+
+//                Log.e("TAG", currentQuestion.getAnswer()+" Dap an");
+                _arr.remove(currentQuestion.getAnswer()-1);
+//                Log.e("TAG", _arr.toString()+"Da xoa");
+                Random rd = new Random();
+
+
+
+                int d = rd.nextInt(_arr.get(rd.nextInt(_arr.size())));
+                _arr.remove(d);
+
+                for(int i=0;i<_arr.size();i++){
+                    switch (_arr.get(i)) {
+                        case 1:
+                            rb1.setVisibility(View.INVISIBLE);
+                            break;
+                        case 2:
+                            rb2.setVisibility(View.INVISIBLE);
+                            break;
+                        case 3:
+                            rb3.setVisibility(View.INVISIBLE);
+                            break;
+                        case 4:
+                            rb4.setVisibility(View.INVISIBLE);
+                            break;
+                    }
+                }
+                btntrogiup1.setVisibility(View.INVISIBLE);
+
+            }
+
+
+        });
     }
+
     // hiển thị câu hỏi
     private void showNextQuestion() {
         // add màu txt
@@ -138,6 +196,8 @@ public class QuestionActivity extends AppCompatActivity {
         rb2.setTextColor(Color.BLACK);
         rb3.setTextColor(Color.BLACK);
         rb4.setTextColor(Color.BLACK);
+
+
 
         txtviewscore.setTextColor(Color.BLACK);
         txtviewquestion.setTextColor(Color.BLACK);
@@ -182,6 +242,7 @@ public class QuestionActivity extends AppCompatActivity {
             Score = Score + 10;
             //Hiển thị điểm
             txtviewscore.setText("Điểm : "+ Score);
+
         }
         if (answer != currentQuestion.getAnswer() && timeLeftInMillis > 1000){
             Toast.makeText(this, "Rất tiếc, bạn sai rồi", Toast.LENGTH_SHORT).show();
@@ -207,18 +268,22 @@ public class QuestionActivity extends AppCompatActivity {
             case 1:
                 rb1.setTextColor(Color.GREEN);
                 txtviewquestion.setText("Đáp án là A");
+//                rb1.setBackgroundColor(Color.GREEN);
                 break;
             case 2:
                 rb2.setTextColor(Color.GREEN);
                 txtviewquestion.setText("Đáp án là B");
+//                rb2.setBackgroundColor(Color.GREEN);
                 break;
             case 3:
                 rb3.setTextColor(Color.GREEN);
                 txtviewquestion.setText("Đáp án là C");
+//                rb3.setBackgroundColor(Color.GREEN);
                 break;
             case 4:
                 rb4.setTextColor(Color.GREEN);
                 txtviewquestion.setText("Đáp án là D");
+//                rb4.setBackgroundColor(Color.GREEN);
                 break;
 
         }
@@ -296,6 +361,7 @@ public class QuestionActivity extends AppCompatActivity {
         rb4 = findViewById(R.id.radioButton4);
 
         btnXacNhan = findViewById(R.id.btnXacNhan);
+        btntrogiup1 = findViewById(R.id.btntrogiup1);
         txtTitle = findViewById(R.id.txtTitle);
     }
 
