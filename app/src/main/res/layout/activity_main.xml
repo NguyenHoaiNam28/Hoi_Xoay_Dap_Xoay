@@ -16,8 +16,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+            android:layout_marginLeft="10dp"
+            android:id="@+id/btn_admin"
+            android:src="@drawable/ic_baseline_live_help_24"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
 
+        </ImageButton>
         <ImageView
+            android:layout_marginTop="40dp"
             android:id="@+id/logo1"
             android:layout_width="match_parent"
             android:layout_height="70dp"

@@ -1,6 +1,8 @@
 package com.vn.hoi_xoay_dap_xoay.model;
 
-public class Question {
+import java.io.Serializable;
+
+public class Question  implements Serializable {
     private int id;
     private String question;
     private String option1, option2, option3, option4;

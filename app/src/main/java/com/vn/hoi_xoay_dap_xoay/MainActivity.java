@@ -1,14 +1,19 @@
 package com.vn.hoi_xoay_dap_xoay;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtScore;
     private Spinner spinnerCategories;
     private Button btnStart;
-
+    private ImageButton btn_admin;
     private int hightscore;
     private static final int REQUEST_CODE_QUESTION = 1;
 
@@ -60,6 +65,48 @@ public class MainActivity extends AppCompatActivity {
                 startQuestion();
             }
         });
+        btn_admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                builder1.setTitle("Bạn Có Muốn Vào Trang Quản Lí Không");
+                builder1.setMessage("nếu có hãy nhập mã xác Minh Vào");
+                builder1.setCancelable(true);
+                EditText input = new EditText(MainActivity.this);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setHint("Nhập Vào Mã Số");
+
+                    builder1.setView(input);
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                if(Integer.parseInt(input.getText().toString()) == 11111)
+                                {
+                                    Toast.makeText(MainActivity.this, "Xác Minh Thành Công", Toast.LENGTH_SHORT).show();
+                                     startActivity(new Intent(MainActivity.this,tabhost.class));
+
+                                }
+                                else
+                                {
+                                    Toast.makeText(MainActivity.this, "Xác Minh Thất Bại", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+        });
     }
     // Hàm bắt đầu câu hỏi
     private void startQuestion() {
@@ -83,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
     private  void addControls(){
         txtScore = findViewById(R.id.txtScore);
         btnStart = findViewById(R.id.btnStart);
+        btn_admin = findViewById(R.id.btn_admin);
         spinnerCategories = findViewById(R.id.spinnerCategories);
 
 

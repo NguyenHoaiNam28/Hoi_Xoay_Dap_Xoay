@@ -22,7 +22,7 @@ public class DataBase extends SQLiteOpenHelper {
     //version
     private static final int VERSION = 1;
 
-    private SQLiteDatabase db;
+    public SQLiteDatabase db;
 
     public DataBase(@Nullable Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -187,6 +187,34 @@ public class DataBase extends SQLiteOpenHelper {
         String[] selectionArgs = new String[]{String.valueOf(categoryID)};
 
         Cursor c = db.query(Table.QuestionsTable.TABLE_NAME, null, selection, selectionArgs, null, null, null);
+
+        if (c.moveToFirst()){
+            do {
+                Question question = new Question();
+
+                question.setId(c.getInt(c.getColumnIndex(Table.QuestionsTable._ID)));
+                question.setQuestion(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_QUESTION)));
+                question.setOption1(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION1)));
+                question.setOption2(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION2)));
+                question.setOption3(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION3)));
+                question.setOption4(c.getString(c.getColumnIndex(Table.QuestionsTable.COLUMN_OPTION4)));
+                question.setAnswer(c.getInt(c.getColumnIndex(Table.QuestionsTable.COLUMN_ANSWER)));
+                question.setCategoryID(c.getInt(c.getColumnIndex(Table.QuestionsTable.COLUMN_CATEGORY_ID)));
+
+                questionArrayList.add(question);
+            }
+            while (c.moveToNext());
+        }
+        c.close();
+        return questionArrayList;
+    }
+    @SuppressLint("Range")
+    public  ArrayList<Question> getQuestions(){
+        ArrayList<Question> questionArrayList = new ArrayList<>();
+
+        db = getReadableDatabase();
+
+        Cursor c = db.query(Table.QuestionsTable.TABLE_NAME, null, null, null, null, null, null);
 
         if (c.moveToFirst()){
             do {

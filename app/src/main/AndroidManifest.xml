@@ -14,16 +14,19 @@
         android:label="Hỏi Xoáy Đáp Xoay"
         android:roundIcon="@drawable/logopm"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Hoi_Xoay_Dap_Xoay"
+        android:theme="@style/Theme.Material3.DayNight.NoActionBar"
         tools:targetApi="31">
 
-
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".AddQuestion"></activity>
+        <activity android:name=".AddCategory"></activity>
+        <activity android:name=".tabhost"></activity>
         <activity
             android:name=".QuestionActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".anim.CreenStart"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
