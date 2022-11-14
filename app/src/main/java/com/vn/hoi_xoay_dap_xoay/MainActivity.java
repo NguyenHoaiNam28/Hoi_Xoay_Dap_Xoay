@@ -24,11 +24,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView txtScore;
+    private TextView txtScore, txtDiemVuaChoi;
     private Spinner spinnerCategories;
     private Button btnStart;
     private ImageButton btn_admin;
-    private int hightscore;
+    private int hightscore, scorevuachoi;
     private static final int REQUEST_CODE_QUESTION = 1;
 
     @Override
@@ -50,8 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadHightScore() {
         SharedPreferences preferences = getSharedPreferences("share", MODE_PRIVATE);
+        SharedPreferences pre = getSharedPreferences("sharescorevuachoi", MODE_PRIVATE);
         hightscore = preferences.getInt("hightscore", 0);
-        txtScore.setText("Điểm cao : "+ hightscore);
+        scorevuachoi  = pre.getInt("scorevuachoi", 0);
+        txtScore.setText("Điểm Cao Nhất : "+ hightscore);
+        txtDiemVuaChoi.setText("Điểm Vừa Chơi : " + scorevuachoi);
 
 
     }
@@ -130,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
     private  void addControls(){
         txtScore = findViewById(R.id.txtScore);
         btnStart = findViewById(R.id.btnStart);
+        txtDiemVuaChoi = findViewById(R.id.txtDiemVuaChoi);
         btn_admin = findViewById(R.id.btn_admin);
         spinnerCategories = findViewById(R.id.spinnerCategories);
 
@@ -157,8 +161,25 @@ public class MainActivity extends AppCompatActivity {
                 if (score > hightscore) {
                     updateHightScore(score);
                 }
+                if (score < hightscore || score > hightscore || score == hightscore){
+                    updateHightScoreVuaChoi(score);
+                }
             }
         }
+    }
+
+    private void updateHightScoreVuaChoi(int score) {
+
+        scorevuachoi = score;
+
+        txtDiemVuaChoi.setText("Điểm Vừa Chơi: "+scorevuachoi);
+        //Lưu trữ điểm
+        SharedPreferences sharedPreferences = getSharedPreferences("sharescorevuachoi", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //gán giá trị điểm cao mới
+        editor.putInt("scorevuachoi", scorevuachoi);
+        //hoàn tất
+        editor.apply();
     }
 
     //cập nhập điểm cao
@@ -166,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         //Gán điểm cao mới
         hightscore = score;
         // Hiển thị
-        txtScore.setText("Điểm cao : " + hightscore);
+        txtScore.setText("Điểm Cao Nhất : " + hightscore);
 //        Lưu trữ điểm
         SharedPreferences sharedPreferences = getSharedPreferences("share", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
