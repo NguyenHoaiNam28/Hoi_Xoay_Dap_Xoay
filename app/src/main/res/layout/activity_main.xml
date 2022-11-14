@@ -40,8 +40,8 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="405dp"
+        android:layout_height="115dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -49,49 +49,43 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="0.0">
 
+
         <Spinner
             android:id="@+id/spinnerCategories"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="50dp"
+            android:layout_width="133dp"
+            android:layout_height="34dp"
+            android:layout_below="@+id/txtScore"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="144dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="128dp"
             android:scrollbarSize="24dp"></Spinner>
-
 
         <TextView
             android:id="@+id/txtScore"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Điểm Cao :  100"
+            android:text="Điểm Cao Nhất :  100"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20dp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/txtDiemVuaChoi"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="40dp"
+            android:text="Điểm Vừa Chơi: 0"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
 
-            android:textStyle="bold">
-
-        </TextView>
-
-        <!--        <EditText-->
-
-        <!--            android:id="@+id/editName"-->
-        <!--            android:layout_width="300dp"-->
-        <!--            android:layout_height="48dp"-->
-        <!--            android:layout_centerHorizontal="true"-->
-        <!--            android:layout_marginTop="30dp"-->
-        <!--            android:hint="Nhập Tên vào đây"></EditText>-->
 
 
-        <!--        <EditText-->
-        <!--            android:id="@+id/editAge"-->
-        <!--            android:layout_width="300dp"-->
-        <!--            android:layout_height="48dp"-->
-        <!--            android:layout_alignParentBottom="true"-->
-        <!--            android:layout_centerHorizontal="true"-->
-        <!--            android:layout_marginStart="23dp"-->
-        <!--            android:layout_marginBottom="28dp"-->
-        <!--            android:hint="Nhập Tuổi vào đây"-->
-        <!--            android:inputType="number"></EditText>-->
     </RelativeLayout>
 
     <RelativeLayout
@@ -118,6 +112,16 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
     </Button>
+
+    <Button
+        android:id="@+id/btnHoTro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hỗ trợ"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!--    <RelativeLayout-->
 <!--        android:layout_width="match_parent"-->

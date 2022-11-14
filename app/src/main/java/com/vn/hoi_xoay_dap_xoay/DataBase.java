@@ -174,8 +174,6 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     // Lấy dữ liệu câu hỏi và đáp án có id = id category theo chủ đề đã chọn
-
-
     @SuppressLint("Range")
     public  ArrayList<Question> getQuestions(int categoryID){
         ArrayList<Question> questionArrayList = new ArrayList<>();
